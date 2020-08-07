@@ -28,7 +28,6 @@ public class LoginController {
 
     @Resource
     private Response response;
-
     /**
      * create by: yanghc
      * description: 登录

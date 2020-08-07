@@ -1,5 +1,12 @@
+server:
+  port: 9568
+
 spring:
   profiles:
     active: dev
-server:
-  port: 9568
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    cache: false

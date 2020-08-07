@@ -62,16 +62,18 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/fonts/**", "anon");
         filterChainDefinitionMap.put("/img/**", "anon");
         filterChainDefinitionMap.put("/js/**", "anon");
-        filterChainDefinitionMap.put("/html/**", "anon");
+//        filterChainDefinitionMap.put("/html/**", "anon");
         // 所有url都必须认证通过才可以访问
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "anon");
+//        filterChainDefinitionMap.put("/layui/layui.js", "anon");
+//        filterChainDefinitionMap.put("/layui/css/layui.css", "anon");
 
         // 配置退出 过滤器,其中的具体的退出代码Shiro已经替我们实现了, 位置放在 anon、authc下面
         filterChainDefinitionMap.put("/logout", "logout");
 
         // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
         // 配器shirot认登录累面地址，前后端分离中登录累面跳转应由前端路由控制，后台仅返回json数据, 对应LoginController中unauth请求
-        shiroFilterFactoryBean.setLoginUrl("/un_auth");
+        shiroFilterFactoryBean.setLoginUrl("/");
 
         // 登录成功后要跳转的链接, 此项目是前后端分离，故此行注释掉，登录成功之后返回用户基本信息及token给前端
         // shiroFilterFactoryBean.setSuccessUrl("/index");
