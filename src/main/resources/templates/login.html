@@ -10,10 +10,10 @@
     <legend style="">用户登录</legend>
 </fieldset>
 
-<form class="layui-form layui-form-pane" id="login-form" action="">
+<form class="layui-form layui-form-pane" id="login-form" method="post" action="/login" lay-filter="example">
     <div class="layui-form-item">
         <div class="layui-input-inline">
-            <input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="用户名"
+            <input type="text" name="userName" lay-verify="required" lay-reqtext="用户名是必填项，不能为空？" placeholder="用户名"
                    autocomplete="off" class="layui-input">
         </div>
         <!--<div class="layui-form-mid layui-word-aux">请务必填写用户名</div>-->
@@ -21,14 +21,15 @@
 
     <div class="layui-form-item">
         <div class="layui-input-inline">
-            <input type="password" name="password" placeholder="密码" autocomplete="off" class="layui-input">
+            <input type="password" name="password" lay-verify="required" placeholder="密码" autocomplete="off"
+                   class="layui-input">
         </div>
     </div>
 
 
     <div class="layui-form-item">
         <div class="layui-input-inline">
-            <button type="button" class="layui-btn" style="width: 100% ;">登录</button>
+            <button type="submit" class="layui-btn" id="sub-btn" style="width: 100% ;">登录</button>
         </div>
     </div>
 
@@ -43,14 +44,13 @@
         var form = layui.form
             , laydate = layui.laydate;
 
-
         laydate.render({
             elem: '#date1'
         });
 
         //自定义验证规则
         form.verify({
-            title: function (value) {
+            userName: function (value) {
                 if (value.length < 5) {
                     return '标题至少得5个字符啊';
                 }
@@ -60,14 +60,24 @@
                 , '密码必须6到12位，且不能出现空格'
             ]
         });
-    })
+
+        //表单取值
+        layui.$('#sub-btn').on('click', function(){
+            event.preventDefault()
+            var data = form.val('example');
+            modal.doPost('/login',data,function (message) {
+                console.log(message);
+            });
+        });
+
+    });
 </script>
 
 <style>
     body {
         width: 500px;
         margin: auto;
-        text-align:center
+        text-align: center
     }
 
     #login-form {
@@ -76,13 +86,13 @@
         height: 200px;
     }
 
-    .layui-input-inline{
+    .layui-input-inline {
         width: 90% !important;
         margin: 20px 0px 0px 25px !important;
 
     }
 
-    .layui-input-inline input{
+    .layui-input-inline input {
         border-radius: 5px !important;
     }
 </style>
