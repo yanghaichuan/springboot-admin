@@ -1,12 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-    <link href="/static/layui/css/layui.css" rel="stylesheet">
-    <script type="text/javascript" src="/static/layui/layui.js"></script>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/include :: common_header(~{::title})">
+    <title>登录</title>
 </head>
-<body>
-<h1>SpringMVC + Thymeleaf Hello World example</h1>
+
+<body style="text-align:center">
+
+<fieldset class="layui-elem-field layui-field-title">
+    <legend style="">用户登录</legend>
+</fieldset>
+
+<form class="layui-form layui-form-pane" id="login-form" action="">
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <input type="text" name="username" lay-verify="required" lay-reqtext="用户名是必填项，岂能为空？" placeholder="用户名"
+                   autocomplete="off" class="layui-input">
+        </div>
+        <!--<div class="layui-form-mid layui-word-aux">请务必填写用户名</div>-->
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <input type="password" name="password" placeholder="密码" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+</form>
+
+<!--使用公有js-->
+<div th:replace="common/include::common_js"></div>
 </body>
+
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , laydate = layui.laydate;
+
+
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [
+                /^[\S]{6,12}$/
+                , '密码必须6到12位，且不能出现空格'
+            ]
+        });
+    })
+</script>
+
+<style>
+    body {
+        text-align: center
+    }
+
+    #login-form {
+        margin: 0 auto;
+        width: 500px;
+        height: 200px;
+        border: 1px solid #F00
+    }
+</style>
 </html>
