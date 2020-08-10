@@ -6,7 +6,7 @@
 
 <body style="text-align:center">
 
-<fieldset class="layui-elem-field layui-field-title">
+<fieldset class="layui-elem-field layui-field-title" style="margin: 85px 25px 25px 25px;">
     <legend style="">用户登录</legend>
 </fieldset>
 
@@ -24,6 +24,14 @@
             <input type="password" name="password" placeholder="密码" autocomplete="off" class="layui-input">
         </div>
     </div>
+
+
+    <div class="layui-form-item">
+        <div class="layui-input-inline">
+            <button type="button" class="layui-btn" style="width: 100% ;background-color: #009688;">登录</button>
+        </div>
+    </div>
+
 </form>
 
 <!--使用公有js-->
@@ -57,14 +65,24 @@
 
 <style>
     body {
-        text-align: center
+        width: 500px;
+        margin: auto;
     }
 
     #login-form {
-        margin: 0 auto;
+        margin: 60px 0 0 0;
         width: 500px;
         height: 200px;
-        border: 1px solid #F00
+    }
+
+    .layui-input-inline{
+        width: 90% !important;
+        margin: 20px 0px 0px 25px !important;
+
+    }
+
+    .layui-input-inline input{
+        border-radius: 5px !important;
     }
 </style>
 </html>
