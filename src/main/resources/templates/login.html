@@ -3,7 +3,7 @@
 <head th:include="common/include :: common_header(~{::title})">
     <title>登录</title>
 </head>
-
+<link href="/static/css/login.css" rel="stylesheet">
 <body>
 
 <fieldset class="layui-elem-field layui-field-title" style="margin: 85px 25px 25px 25px;">
@@ -66,34 +66,13 @@
             event.preventDefault()
             var data = form.val('example');
             modal.doPost('/login',data,function (message) {
-                console.log(message);
+                if(message.meta.code == 200){
+                    location.href = '/index';
+                }
             });
         });
 
     });
 </script>
 
-<style>
-    body {
-        width: 500px;
-        margin: auto;
-        text-align: center
-    }
-
-    #login-form {
-        margin: 60px 0 0 0;
-        width: 500px;
-        height: 200px;
-    }
-
-    .layui-input-inline {
-        width: 90% !important;
-        margin: 20px 0px 0px 25px !important;
-
-    }
-
-    .layui-input-inline input {
-        border-radius: 5px !important;
-    }
-</style>
 </html>

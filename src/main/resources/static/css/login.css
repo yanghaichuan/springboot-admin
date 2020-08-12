@@ -1,0 +1,21 @@
+body {
+    width: 500px;
+    margin: auto;
+    text-align: center
+}
+
+#login-form {
+    margin: 60px 0 0 0;
+    width: 500px;
+    height: 200px;
+}
+
+.layui-input-inline {
+    width: 90% !important;
+    margin: 20px 0px 0px 25px !important;
+
+}
+
+.layui-input-inline input {
+    border-radius: 5px !important;
+}
