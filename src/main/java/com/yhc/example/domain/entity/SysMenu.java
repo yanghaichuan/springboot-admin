@@ -23,6 +23,11 @@ public class SysMenu implements Serializable {
     private String menuName;
 
     /**
+     * 菜单类型
+     */
+    private String menuType;
+
+    /**
      * 父菜单id
      */
     private Long parentId;

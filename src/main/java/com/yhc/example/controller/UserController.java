@@ -9,6 +9,7 @@ import com.yhc.example.service.IUserService;
 import com.yhc.example.util.MD5Utils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -21,7 +22,7 @@ import java.util.List;
  *
  * @since 2019-06-28
  */
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
@@ -32,12 +33,22 @@ public class UserController {
     private Response response;
 
     /**
+     * 用户列表
+     * @return
+     */
+    @GetMapping("/list")
+    public String list() {
+        return "/user/list";
+    }
+
+    /**
      * 用户查询.
      *
      * @return
      */
     @GetMapping("/userList")
     @RequiresPermissions("user:view")//权限管理;
+    @ResponseBody
     public Response listUsers() {
         List<User> users = iUserService.listUsers();
         return response.success("查询成功！", users);
@@ -50,6 +61,7 @@ public class UserController {
      */
     @PostMapping("/userAdd")
     @RequiresPermissions("user:add")//权限管理;
+    @ResponseBody
     public Response userInfoAdd(@RequestBody User user) {
         if (user.getUserName().isEmpty()) {
             return response.failure(UserMsgContants.USER_NEME_ISEMPTY);
@@ -76,6 +88,7 @@ public class UserController {
      */
     @DeleteMapping("/userDel")
     @RequiresPermissions("user:del")//权限管理;
+    @ResponseBody
     public String userDel() {
         return "userDel";
     }

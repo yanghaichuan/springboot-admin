@@ -1,9 +1,11 @@
 package com.yhc.example.controller;
 
-
 import com.yhc.example.bean.Response;
+import com.yhc.example.constant.SystemConstants;
 import com.yhc.example.domain.entity.SysMenu;
 import com.yhc.example.domain.mapper.SysMenuMapper;
+import com.yhc.example.domain.vo.TreeBean;
+import com.yhc.example.util.BuildTree;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -11,6 +13,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * sys_menu
@@ -30,8 +34,8 @@ public class SysMenuController {
      * 新增或编辑
      */
     @PostMapping("/save")
-    public Object save(SysMenu sysMenu){
-        SysMenu menu = sysMenuMapper.selectOne(new QueryWrapper<SysMenu>().eq("menuId",sysMenu.getMenuId()));
+    public Response save(SysMenu sysMenu){
+        SysMenu menu = sysMenuMapper.selectOne(new QueryWrapper<SysMenu>().eq("menu_id",sysMenu.getMenuId()));
         if(menu!=null){
             sysMenuMapper.updateById(sysMenu);
         }else{
@@ -44,8 +48,8 @@ public class SysMenuController {
      * 删除
      */
     @PostMapping("/delete")
-    public Object delete(int id){
-        SysMenu sysMenu = sysMenuMapper.selectOne(new QueryWrapper<SysMenu>().eq("id",id));
+    public Response delete(int id){
+        SysMenu sysMenu = sysMenuMapper.selectOne(new QueryWrapper<SysMenu>().eq("menu_id",id));
         if(sysMenu!=null){
             return response.success(sysMenu);
         }else{
@@ -57,8 +61,8 @@ public class SysMenuController {
      * 查询
      */
     @PostMapping("/find")
-    public Object find(int id){
-        SysMenu sysMenu = sysMenuMapper.selectOne(new QueryWrapper<SysMenu>().eq("id",id));
+    public Response find(int id){
+        SysMenu sysMenu = sysMenuMapper.selectOne(new QueryWrapper<SysMenu>().eq("menu_id",id));
         if(sysMenu!=null){
             return response.success(sysMenu);
         }else{
@@ -70,7 +74,7 @@ public class SysMenuController {
      * 分页查询
      */
     @PostMapping("/list")
-    public Object list(SysMenu sysMenu,
+    public Response list(SysMenu sysMenu,
                        @RequestParam(required = false, defaultValue = "0") int pageNumber,
                        @RequestParam(required = false, defaultValue = "10") int pageSize) {
         //分页构造器
@@ -81,6 +85,32 @@ public class SysMenuController {
         IPage<SysMenu> pageList = sysMenuMapper.selectPage(page, queryWrapperw);
         //返回结果
         return response.success(pageList);
+    }
+
+
+    /**
+     * 分页查询
+     */
+    @PostMapping("/select")
+    public Response select(SysMenu sysMenu) {
+        //条件构造器
+        QueryWrapper<SysMenu> queryWrapperw = new QueryWrapper<SysMenu>(sysMenu);
+        //执行分页
+        List<SysMenu> list = sysMenuMapper.selectList(queryWrapperw);
+
+        List<TreeBean> treeBeans = new ArrayList<>();
+        for(SysMenu menu:list){
+            TreeBean treeBean = new TreeBean();
+            treeBean.setId(menu.getMenuId());
+            treeBean.setName(menu.getMenuName());
+            treeBean.setUrl(menu.getUrl());
+            treeBean.setParentId(menu.getParentId());
+            treeBean.setBadge(menu.getBadge());
+            treeBean.setType(menu.getMenuType());
+            treeBeans.add(treeBean);
+        }
+        //返回结果
+        return response.success(BuildTree.build(treeBeans, SystemConstants.MENU_ROOT));
     }
 
 }

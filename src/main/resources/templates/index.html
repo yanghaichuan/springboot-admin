@@ -16,31 +16,54 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <ul class="layui-nav layui-nav-tree site-demo-nav">
-                <li class="layui-nav-item">
-                    <a class="javascript:;" href="javascript:;">开发工具<span class="layui-nav-more"></span></a>
-                    <dl class="layui-nav-child">
-                        <dd>
-                            <a href="/demo/">调试预览</a>
-                        </dd>
-                    </dl>
-                </li>
+            <ul class="layui-nav layui-nav-tree site-demo-nav" id="menu-tree">
+                <!--<li class="layui-nav-item">-->
+                    <!--<a class="javascript:;" href="javascript:;">开发工具<span class="layui-nav-more"></span></a>-->
+                    <!--<dl class="layui-nav-child">-->
+                        <!--<dd>-->
+                            <!--<a href="/demo/">调试预览</a>-->
+                        <!--</dd>-->
+                    <!--</dl>-->
+                <!--</li>-->
             </ul>
 
         </div>
     </div>
 </div>
 
-<!--<blockquote class="layui-elem-quote layui-bg-green">注意：下述演示中的颜色只是做一个区分作用，并非栅格内置。</blockquote>-->
 <!--使用公有js-->
 <div th:replace="common/include::common_js"></div>
 </body>
 <script>
     $(function () {
-        $(".layui-nav-item").click(function () {
-            $(this).toggleClass("layui-nav-itemed");
+        modal.doPost('/sysMenu/select', {}, function (message) {
+            if (message.meta.code == 200) {
+                var html = '';
+                $.each(message.data, function (i, item) {
+                    html += ' <li class="layui-nav-item">';
+                    html += ' <a class="javascript:;" href="javascript:;">' + item.name + '<span class="layui-nav-more"></span></a>';
+                    if (item.children) {
+                        $.each(item.children, function (j, child) {
+                            html += ' <dl class="layui-nav-child">';
+                            html += ' <dd>';
+                            html += ' <a href="'+child.url+'">'+child.name+'</a>';
+                            html += ' </dl>';
+                            html += ' </dd>';
+
+                        });
+                    }
+                    html += ' </li>';
+
+                })
+                $("#menu-tree").append(html);
+                $(".layui-nav-item").click(function () {
+                    $(this).toggleClass("layui-nav-itemed");
+                });
+            }
         });
-    })
+
+
+    });
 
 </script>
 
