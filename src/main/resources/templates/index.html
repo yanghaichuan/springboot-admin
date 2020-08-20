@@ -16,19 +16,28 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <ul class="layui-nav layui-nav-tree site-demo-nav" id="menu-tree">
-                <!--<li class="layui-nav-item">-->
-                    <!--<a class="javascript:;" href="javascript:;">开发工具<span class="layui-nav-more"></span></a>-->
-                    <!--<dl class="layui-nav-child">-->
-                        <!--<dd>-->
-                            <!--<a href="/demo/">调试预览</a>-->
-                        <!--</dd>-->
-                    <!--</dl>-->
-                <!--</li>-->
+            <ul class="layui-nav layui-nav-tree layui-inline" id="menu-tree" lay-filter="demo" style="margin-right: 10px;">
             </ul>
-
         </div>
     </div>
+
+    <div class="layui-tab" lay-filter="filter" lay-allowclose="true" style="position: fixed;left: 200px;right: 0;">
+        <ul class="layui-tab-title">
+            <li class="layui-this" lay-id="11">网站设置</li>
+            <li lay-id="22">用户管理</li>
+            <li lay-id="33">权限分配</li>
+            <li lay-id="44">商品管理</li>
+            <li lay-id="55">订单管理</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">内容1</div>
+            <div class="layui-tab-item">内容2</div>
+            <div class="layui-tab-item">内容3</div>
+            <div class="layui-tab-item">内容4</div>
+            <div class="layui-tab-item">内容5</div>
+        </div>
+    </div>
+
 </div>
 
 <!--使用公有js-->
@@ -46,7 +55,7 @@
                         $.each(item.children, function (j, child) {
                             html += ' <dl class="layui-nav-child">';
                             html += ' <dd>';
-                            html += ' <a href="'+child.url+'">'+child.name+'</a>';
+                            html += ' <a href="javascript:;">' + child.name + '</a>';
                             html += ' </dl>';
                             html += ' </dd>';
 
@@ -56,13 +65,35 @@
 
                 })
                 $("#menu-tree").append(html);
-                $(".layui-nav-item").click(function () {
-                    $(this).toggleClass("layui-nav-itemed");
-                });
             }
         });
 
 
+    });
+
+    layui.use(['layer', 'element'], function () {
+        var layer = layui.layer,
+            element = layui.element;
+
+        element.on('tab(filter)', function (data) {
+            console.log(this); //当前Tab标题所在的原始DOM元素
+            console.log(data.index); //得到当前Tab的所在下标
+            console.log(data.elem); //得到当前的Tab大容器
+        });
+
+        // 监听导航点击
+        element.on('nav(demo)', function (elem) {
+            //console.log(elem)
+            layer.msg(elem.text());
+        });
+        // //弹出即全屏
+        // var index = layer.open({
+        //     type: 2,
+        //     content: 'http://layim.layui.com',
+        //     area: ['320px', '195px'],
+        //     maxmin: true
+        // });
+        // layer.full(index);
     });
 
 </script>
