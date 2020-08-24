@@ -16,25 +16,18 @@
 
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll">
-            <ul class="layui-nav layui-nav-tree layui-inline" id="menu-tree" lay-filter="demo" style="margin-right: 10px;">
+            <ul class="layui-nav layui-nav-tree layui-inline" id="menu-tree" lay-filter="demo"
+                style="margin-right: 10px;">
             </ul>
         </div>
     </div>
 
-    <div class="layui-tab" lay-filter="filter" lay-allowclose="true" style="position: fixed;left: 200px;right: 0;">
+    <div class="layui-tab layui-tab-card" lay-filter="filter" lay-allowclose="true" style="position: fixed;left: 200px;right: 0;">
         <ul class="layui-tab-title">
-            <li class="layui-this" lay-id="11">网站设置</li>
-            <li lay-id="22">用户管理</li>
-            <li lay-id="33">权限分配</li>
-            <li lay-id="44">商品管理</li>
-            <li lay-id="55">订单管理</li>
+            <li class="layui-this" lay-id="11">首页</li>
         </ul>
         <div class="layui-tab-content">
-            <div class="layui-tab-item layui-show">内容1</div>
-            <div class="layui-tab-item">内容2</div>
-            <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">内容4</div>
-            <div class="layui-tab-item">内容5</div>
+            <div class="layui-tab-item layui-show"><iframe src="main.html"></iframe></div>
         </div>
     </div>
 
@@ -84,7 +77,18 @@
         // 监听导航点击
         element.on('nav(demo)', function (elem) {
             //console.log(elem)
-            layer.msg(elem.text());
+            // layer.msg(elem.text());
+            //新增一个Tab项
+
+            if ($(this).siblings().length == 0) {
+                element.tabAdd('filter', {
+                    title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+                    , content: '内容' + (Math.random() * 1000 | 0)
+                    , id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+                })
+            }
+            ;
+
         });
         // //弹出即全屏
         // var index = layer.open({

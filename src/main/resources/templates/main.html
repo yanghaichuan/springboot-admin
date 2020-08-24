@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/include :: common_header(~{::title})">
+    <title>首页</title>
+</head>
+<body>
+<div class="layui-fluid" >
+    <div class="layui-row layui-col-space10">
+    </div>
+</div>
+
+<!--使用公有js-->
+<div th:replace="common/include::common_js"></div>
+</body>
+
+<script>
+    layui.use(['layer', 'element'], function () {
+        // var layer = layui.layer,
+        //     element = layui.element;
+        // //弹出即全屏
+        // var index = layer.open({
+        //     type: 2,
+        //     content: 'http://layim.layui.com',
+        //     area: ['320px', '195px'],
+        //     maxmin: true
+        // });
+        // layer.full(index);
+    });
+
+</script>
+
+<style>
+    .layui-fluid{position:relative;margin:0 auto;padding:10px;}
+
+</style>
+</html>

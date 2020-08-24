@@ -76,7 +76,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setLoginUrl("/");
 
         // 登录成功后要跳转的链接, 此项目是前后端分离，故此行注释掉，登录成功之后返回用户基本信息及token给前端
-         shiroFilterFactoryBean.setSuccessUrl("/index");
+//         shiroFilterFactoryBean.setSuccessUrl("/index");
 
         // 未授权界面, 对应LoginController中 unauthorized 请求
         shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");

@@ -17,8 +17,4 @@ public class BaseController {
         return "login";
     }
 
-    @GetMapping("/index")
-    public String index(){
-        return "index";
-    }
 }

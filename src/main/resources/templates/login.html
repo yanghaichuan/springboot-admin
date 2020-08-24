@@ -67,7 +67,7 @@
             var data = form.val('example');
             modal.doPost('/login',data,function (message) {
                 if(message.meta.code == 200){
-                    location.href = '/index';
+                    location.href = '/index.html';
                 }
             });
         });
