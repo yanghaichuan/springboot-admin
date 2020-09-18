@@ -1,6 +1,5 @@
 package com.yhc.example.magic;
 
-import com.yhc.example.magic.pojo.GithubUserInfo;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -10,7 +9,6 @@ public class GithubRepoPageProcessor implements PageProcessor {
 
     private Site site = Site.me().setRetryTimes(3).setSleepTime(30000);
 
-    GithubUserInfo githubUserInfo = new GithubUserInfo();
     @Override
     public void process(Page page) {
         page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+/\\w+)").all());
