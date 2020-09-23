@@ -4,8 +4,10 @@ import com.yhc.example.bean.Response;
 import com.yhc.example.constant.SystemConstants;
 import com.yhc.example.domain.entity.SysMenu;
 import com.yhc.example.domain.mapper.SysMenuMapper;
+import com.yhc.example.domain.vo.MenuBean;
 import com.yhc.example.domain.vo.TreeBean;
 import com.yhc.example.util.BuildTree;
+import com.yhc.example.util.TreeBeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -91,26 +93,27 @@ public class SysMenuController {
     /**
      * 分页查询
      */
-    @PostMapping("/select")
-    public Response select(SysMenu sysMenu) {
+    @GetMapping("/select")
+    public Response select(SysMenu sysMenu) throws Exception {
         //条件构造器
         QueryWrapper<SysMenu> queryWrapperw = new QueryWrapper<SysMenu>(sysMenu);
         //执行分页
         List<SysMenu> list = sysMenuMapper.selectList(queryWrapperw);
 
-        List<TreeBean> treeBeans = new ArrayList<>();
+        List<MenuBean> treeBeans = new ArrayList<>();
         for(SysMenu menu:list){
-            TreeBean treeBean = new TreeBean();
+            MenuBean treeBean = new MenuBean();
             treeBean.setId(menu.getMenuId());
-            treeBean.setName(menu.getMenuName());
-            treeBean.setUrl(menu.getUrl());
+            treeBean.setTitle(menu.getMenuName());
+            treeBean.setHref(menu.getUrl());
             treeBean.setParentId(menu.getParentId());
-            treeBean.setBadge(menu.getBadge());
-            treeBean.setType(menu.getMenuType());
+            treeBean.setIcon(menu.getBadge());
+            treeBean.setFontFamily(menu.getFontFamily());
             treeBeans.add(treeBean);
         }
+        List<MenuBean> tree = TreeBeanUtils.getTree(treeBeans,"id");
         //返回结果
-        return response.success(BuildTree.build(treeBeans, SystemConstants.MENU_ROOT));
+        return response.success(tree);
     }
 
 }

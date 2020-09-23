@@ -43,6 +43,11 @@ public class SysMenu implements Serializable {
     private Integer state;
 
     /**
+     *字体
+     */
+    private String fontFamily;
+
+    /**
      * 样式徽章
      */
     private String badge;
