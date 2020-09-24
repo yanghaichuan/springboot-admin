@@ -17,7 +17,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //视图映射：浏览器发送"/"请求，会来到index页面（thymeleaf解析的页面），
 //        registry.addViewController("/").setViewName("/index");
         registry.addViewController("/index.html").setViewName("/index");
-        registry.addViewController("/main.html").setViewName("/main");
+        registry.addViewController("/pages/console.html").setViewName("/pages/console");
         //配置springboot直接访问静态html页面，不经过controller
         //配置之后，发送/loginAndRegister.html，就相当于在controller中return "loginAndRegister"
         registry.addViewController("/loginAndRegister.html").setViewName("/loginAndRegister");
