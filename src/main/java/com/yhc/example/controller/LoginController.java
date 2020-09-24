@@ -1,7 +1,7 @@
 package com.yhc.example.controller;
 
+import com.yhc.example.bean.AjaxResult;
 import com.yhc.example.bean.CacheUser;
-import com.yhc.example.bean.Response;
 import com.yhc.example.util.MD5Utils;
 import com.yhc.example.domain.entity.User;
 import com.yhc.example.service.IUserService;
@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,8 +26,6 @@ public class LoginController {
     @Resource
     private IUserService iUserService;
 
-    @Resource
-    private Response response;
     /**
      * create by: yanghc
      * description: 登录
@@ -37,25 +34,25 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping("/login")
-    public Response login(User user) {
+    public AjaxResult login(User user) {
         log.warn("进入登录.....");
 
         String userName = user.getUserName();
         String password = user.getPassword();
 
         if (StringUtils.isBlank(userName)) {
-            return response.failure("用户名为空！");
+            return AjaxResult.error("用户名为空！");
         }
 
         if (StringUtils.isBlank(password)) {
-            return response.failure("密码为空！");
+            return AjaxResult.error("密码为空！");
         }
 
         String pwd = MD5Utils.encrypt(userName,password);
         System.out.println("加盐+次数构成的值:"+"================>"+pwd);
         CacheUser loginUser = iUserService.login(userName, password);
         // 登录成功返回用户信息
-        return response.success("登录成功！", loginUser);
+        return AjaxResult.success("登录成功！", loginUser);
     }
 
     /**
@@ -64,9 +61,9 @@ public class LoginController {
      * create time: 2020/7/03 14:22
      */
     @RequestMapping("/logout")
-    public Response logOut() {
+    public AjaxResult logOut() {
         iUserService.logout();
-        return response.success("登出成功！");
+        return AjaxResult.success("登出成功！");
     }
 
     /**
@@ -78,8 +75,8 @@ public class LoginController {
      * @return  
      */
     @RequestMapping("/un_auth")
-    public Response unAuth() {
-        return response.failure(HttpStatus.UNAUTHORIZED, "用户未登录！", null);
+    public AjaxResult unAuth() {
+        return AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "用户未登录！");
     }
 
     /**
@@ -91,13 +88,13 @@ public class LoginController {
      * @return
      */
     @RequestMapping("/unauthorized")
-    public Response unauthorized() {
-        return response.failure(HttpStatus.FORBIDDEN, "用户无权限！", null);
+    public AjaxResult unauthorized() {
+        return AjaxResult.error(HttpStatus.FORBIDDEN.value(), "用户无权限！");
     }
 
 
     @RequestMapping("/heartDet")
-    public Response heartDet() {
-        return response.success("用户已登录");
+    public AjaxResult heartDet() {
+        return AjaxResult.success("用户已登录");
     }
 }
