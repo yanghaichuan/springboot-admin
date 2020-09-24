@@ -40,6 +40,6 @@ public interface IUserService extends IService<User> {
      */
     void logout();
 
-    List<User> listUsers();
+    List<User> listUsers(User user);
 
 }

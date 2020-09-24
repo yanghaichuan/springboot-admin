@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -25,14 +26,17 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "roleId", type = IdType.AUTO)
+    @TableId(value = "role_id", type = IdType.AUTO)
     private Integer roleId;
 
-    private Boolean available;
+    private String roleName;
 
-    private String description;
+    private String roleCode;
 
-    private String role;
+    private String state;
+
+    private Date createTime;
+
 
 
 }

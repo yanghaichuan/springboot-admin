@@ -14,33 +14,15 @@
 		<form class="layui-form ok-search-form">
 			<div class="layui-form-item">
 				<div class="layui-inline">
-					<label class="layui-form-label">开始日期</label>
-					<div class="layui-input-inline">
-						<input type="text" class="layui-input" placeholder="开始日期" autocomplete="off" id="startTime" name="startTime">
-					</div>
-				</div>
-				<div class="layui-inline">
-					<label class="layui-form-label">截止日期</label>
-					<div class="layui-input-inline">
-						<input type="text" class="layui-input" placeholder="截止日期" autocomplete="off" id="endTime" name="endTime">
-					</div>
-				</div>
-				<div class="layui-inline">
 					<label class="layui-form-label">账号</label>
 					<div class="layui-input-inline">
-						<input type="text" class="layui-input" placeholder="账号" autocomplete="off" name="username">
+						<input type="text" class="layui-input" placeholder="账号" autocomplete="off" name="userName">
 					</div>
 				</div>
 				<div class="layui-inline">
 					<label class="layui-form-label">姓名</label>
 					<div class="layui-input-inline">
 						<input type="text" class="layui-input" placeholder="姓名" autocomplete="off" name="name">
-					</div>
-				</div>
-				<div class="layui-inline">
-					<label class="layui-form-label">昵称</label>
-					<div class="layui-input-inline">
-						<input type="text" class="layui-input" placeholder="昵称" autocomplete="off" name="nickname">
 					</div>
 				</div>
 				<div class="layui-inline">
@@ -52,17 +34,17 @@
 				<div class="layui-inline">
 					<label class="layui-form-label">请选择角色</label>
 					<div class="layui-input-inline">
-						<select name="role" lay-verify="" lay-search>
+						<select name="roleId" lay-verify="" lay-search>
 							<option value="" selected>请选择角色</option>
-							<option value="0">超级会员</option>
-							<option value="1">普通用户</option>
+							<option value="1">超级会员</option>
+							<option value="2">普通用户</option>
 						</select>
 					</div>
 				</div>
 				<div class="layui-inline">
 					<label class="layui-form-label">请选择状态</label>
 					<div class="layui-input-inline">
-						<select name="status" lay-verify="" lay-search>
+						<select name="state" lay-verify="" lay-search>
 							<option value="" selected>请选择状态</option>
 							<option value="0">启用</option>
 							<option value="1">停用</option>
@@ -109,18 +91,12 @@
 			size: "sm",
 			cols: [[
 				{type: "checkbox", fixed: "left"},
-				{field: "userId", title: "ID", width: 160, sort: true},
+				{field: "userId", title: "ID", width: 80, sort: true},
 				{field: "userName", title: "账号", width: 100},
-				{field: "password", title: "密码", width: 100},
 				{field: "name", title: "姓名", width: 100},
-				{field: "nickname", title: "昵称", width: 100},
-				{field: "role", title: "角色", width: 100, templet: "#roleTpl"},
-				{field: "status", title: "状态", width: 100, templet: "#statusTpl"},
+				{field: "roleId", title: "角色", width: 100, templet: "#roleTpl"},
+				{field: "state", title: "状态", width: 100, templet: "#statusTpl"},
 				{field: "email", title: "邮箱", width: 200},
-				{field: "province", title: "省份", width: 120},
-				{field: "city", title: "城市", width: 100},
-				{field: "county", title: "区县", width: 120},
-				{field: "logins", title: "登陆次数", width: 100},
 				{field: "createTime", title: "创建时间", width: 150},
 				{field: "updateTime", title: "更新时间", width: 150},
 				{title: "操作", width: 100, align: "center", fixed: "right", templet: "#operationTpl"}
@@ -255,17 +231,17 @@
 </script>
 
 <script type="text/html" id="statusTpl">
-	{{#  if(d.status == 0){ }}
+	{{#  if(d.state == 0){ }}
 	<span class="layui-btn layui-btn-normal layui-btn-xs">启用</span>
-	{{#  } else if(d.status == 1) { }}
+	{{#  } else if(d.state == 1) { }}
 	<span class="layui-btn layui-btn-warm layui-btn-xs">停用</span>
 	{{#  } }}
 </script>
 
 <script type="text/html" id="roleTpl">
-	{{#  if(d.role == 0){ }}
+	{{#  if(d.roleId == 1){ }}
 	<span class="layui-btn layui-btn-normal layui-btn-xs">超级会员</span>
-	{{#  } else if(d.role == 1) { }}
+	{{#  } else if(d.roleId == 2) { }}
 	<span class="layui-btn layui-btn-warm layui-btn-xs">普通用户</span>
 	{{#  } }}
 </script>

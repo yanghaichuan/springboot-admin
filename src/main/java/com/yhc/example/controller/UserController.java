@@ -4,8 +4,10 @@ package com.yhc.example.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import com.yhc.example.bean.AjaxResult;
 import com.yhc.example.bean.TableDataInfo;
+import com.yhc.example.constant.SystemConstants;
 import com.yhc.example.constant.UserConstants;
 import com.yhc.example.constant.UserMsgContants;
 import com.yhc.example.domain.entity.User;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -62,13 +65,14 @@ public class UserController {
     @GetMapping("/userList")
     @ResponseBody
     public TableDataInfo listUsers(@RequestParam(required = false, defaultValue = "1") Integer pageNo,
-                                   @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
+                                   @RequestParam(required = false, defaultValue = "10") Integer pageSize,User user) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.setEntity(user);
         IPage<User> page = new Page<>(pageNo, pageSize);
         page = iUserService.page(page,queryWrapper);
         TableDataInfo tableDataInfo = new TableDataInfo();
         tableDataInfo.setCount(page.getTotal());
-        tableDataInfo.setCode(0);
+        tableDataInfo.setCode(SystemConstants.SUCCESS_CODE);
         tableDataInfo.setData(page.getRecords());
         return tableDataInfo;
     }

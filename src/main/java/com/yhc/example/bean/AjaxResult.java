@@ -14,7 +14,7 @@ public class AjaxResult extends HashMap<String, Object> {
     /**
      * 默认成功响应码
      */
-    private static final Integer DEAFAULT_SUCCESS_CODE = HttpStatus.OK.value();
+    private static final Integer DEAFAULT_SUCCESS_CODE = 0;
     /**
      * 默认成功响应信息
      */
@@ -22,7 +22,7 @@ public class AjaxResult extends HashMap<String, Object> {
     /**
      * 默认失败响应码
      */
-    private static final Integer DEAFAULT_FAILURE_CODE = HttpStatus.INTERNAL_SERVER_ERROR.value();
+    private static final Integer DEAFAULT_FAILURE_CODE = 1;
     /**
      * 默认失败响应信息
      */

@@ -80,8 +80,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public List<User> listUsers() {
-        return baseMapper.selectList(new LambdaQueryWrapper<>());
+    public List<User> listUsers(User user) {
+        return baseMapper.listUsers(user);
     }
 
 }

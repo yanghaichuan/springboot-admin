@@ -59,7 +59,7 @@ public class MyShiroRealm extends AuthorizingRealm {
         List<Role> roles = iRoleService.getUserRoles(user.getUserId());
 
         for (Role role : roles) {
-            authorizationInfo.addRole(role.getRole());
+            authorizationInfo.addRole(role.getRoleCode());
             // 根据角色查询权限
             List<Permission> permissions = iPermissionService.getRolePermissions(role.getRoleId());
             for (Permission p : permissions) {

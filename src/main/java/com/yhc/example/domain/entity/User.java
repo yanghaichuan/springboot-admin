@@ -4,14 +4,12 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.crazycake.shiro.AuthCachePrincipal;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -33,24 +31,29 @@ public class User implements Serializable {
     @TableId(value = "userId", type = IdType.AUTO)
     private Integer userId;
 
-    @TableField("createTime")
-    private Date createTime;
-
-    private String email;
-
-    @TableField("expiredDate")
-    private Date expiredDate;
+    @TableField("userName")
+    private String userName;
 
     private String name;
 
+    private Integer roleId;
+
+    private String email;
+
     private String password;
+
+    private String phone;
 
     private String salt;
 
     private Integer state;
 
-    @TableField("userName")
-    private String userName;
+    @TableField("expiredDate")
+    private Date expiredDate;
+
+    @TableField("createTime")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
 
     /**
      * 密码盐. 重新对盐重新进行了定义，用户名+salt，这样就不容易被破解，可以采用多种方式定义加盐
