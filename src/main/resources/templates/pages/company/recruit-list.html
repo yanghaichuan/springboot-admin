@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
-	<title>企业列表</title>
+	<title>招聘列表</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<link rel="stylesheet" href="/css/oksub.css">
 	<script type="text/javascript" src="/lib/loading/okLoading.js"></script>
@@ -14,7 +14,14 @@
 		<form class="layui-form ok-search-form">
 			<div class="layui-form-item">
 				<div class="layui-inline">
-					<label class="layui-form-label">名称</label>
+					<label class="layui-form-label">标题</label>
+					<div class="layui-input-inline">
+						<input type="text" class="layui-input" placeholder="标题" autocomplete="off" name="title">
+					</div>
+				</div>
+
+				<div class="layui-inline">
+					<label class="layui-form-label">企业名称</label>
 					<div class="layui-input-inline">
 						<input type="text" class="layui-input" placeholder="名称" autocomplete="off" name="company">
 					</div>
@@ -31,18 +38,14 @@
 					</div>
 				</div>
 
-
 				<div class="layui-inline">
-					<label class="layui-form-label">请选择规模</label>
+					<label class="layui-form-label">截止日期</label>
 					<div class="layui-input-inline">
-						<select name="companyScale" lay-verify="" lay-search>
-							<option value="" selected>请选择规模</option>
-							<option value="1">中小规模</option>
-							<option value="2">中大规模</option>
-							<option value="3">超大规模</option>
-						</select>
+						<input type="text" class="layui-input" placeholder="截止日期" autocomplete="off" id="expiredTime" name="expiredTime">
 					</div>
 				</div>
+
+
 
 				<div class="layui-inline">
 					<div class="layui-input-inline">
@@ -71,9 +74,12 @@
 
 		okLoading.close($);
 
+		laydate.render({elem: "#startTime", type: "datetime"});
+		laydate.render({elem: "#expiredTime", type: "datetime"});
+
 		let userTable = table.render({
 			elem: '#tableId',
-			url: '/company/list',
+			url: '/company/recruit/list',
 			limit: 20,
 			page: true,
 			toolbar: true,
@@ -82,13 +88,15 @@
 			cols: [[
 				{type: "checkbox", fixed: "left"},
 				{field: "id", title: "ID", width: 80, sort: true},
+				{field: "title", title: "标题", width: 150},
 				{field: "company", title: "企业名称", width: 100},
-				{field: "companyCode", title: "企业编码", width: 100},
-				{field: "companyAdress", title: "联系地址", width: 200},
-				{field: "companyScale", title: "规模", width: 100, templet: "#scaleTpl"},
-				{field: "mobile", title: "联系电话", width: 100},
-				{field: "province", title: "省份", width: 120},
-				{field: "city", title: "城市", width: 120},
+				{field: "expiredTime", title: "截止日期", width: 150},
+				{field: "recruitNumber", title: "招聘人数", width: 100},
+				{field: "recruitPost", title: "招聘岗位", width: 100},
+				{field: "recruitInfo", title: "招聘内容", width: 200},
+				{field: "phone", title: "联系电话", width: 100},
+				{field: "email", title: "邮箱", width: 120},
+				{field: "contacts", title: "联系人", width: 100},
 				{field: "status", title: "状态", width: 100, templet: "#statusTpl"},
 				{field: "createTime", title: "创建时间", width: 150},
 				{title: "操作", width: 100, align: "center", fixed: "right", templet: "#operationTpl"}

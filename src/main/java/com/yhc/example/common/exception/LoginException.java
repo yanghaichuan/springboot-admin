@@ -1,4 +1,4 @@
-package com.yhc.example.web.exception;
+package com.yhc.example.common.exception;
 
 /**
  * @author ：yanghc

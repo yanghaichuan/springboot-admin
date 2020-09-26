@@ -6,7 +6,7 @@ import com.yhc.example.bean.CacheUser;
 import com.yhc.example.domain.entity.User;
 import com.yhc.example.domain.mapper.UserMapper;
 import com.yhc.example.service.IUserService;
-import com.yhc.example.web.exception.LoginException;
+import com.yhc.example.common.exception.LoginException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
