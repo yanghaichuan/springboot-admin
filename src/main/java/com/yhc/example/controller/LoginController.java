@@ -8,9 +8,10 @@ import com.yhc.example.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
  * @description：登录Controller
  */
 @Slf4j
-@RestController
+@Controller
 public class LoginController {
 
     @Resource
@@ -35,6 +36,7 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping("/login")
+    @ResponseBody
     public AjaxResult login(User user) {
         log.warn("进入登录.....");
 
@@ -62,9 +64,9 @@ public class LoginController {
      * create time: 2020/7/03 14:22
      */
     @RequestMapping("/logout")
-    public AjaxResult logOut() {
+    public String logOut() {
         iUserService.logout();
-        return AjaxResult.success("登出成功！");
+        return "pages/login";
     }
 
     /**
@@ -76,6 +78,7 @@ public class LoginController {
      * @return  
      */
     @RequestMapping("/un_auth")
+    @ResponseBody
     public AjaxResult unAuth() {
         return AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "用户未登录！");
     }
@@ -89,12 +92,14 @@ public class LoginController {
      * @return
      */
     @RequestMapping("/unauthorized")
+    @ResponseBody
     public AjaxResult unauthorized() {
         return AjaxResult.error(HttpStatus.FORBIDDEN.value(), "用户无权限！");
     }
 
 
     @RequestMapping("/heartDet")
+    @ResponseBody
     public AjaxResult heartDet() {
         return AjaxResult.success("用户已登录");
     }

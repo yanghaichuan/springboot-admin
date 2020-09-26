@@ -17,4 +17,8 @@ public class BaseController {
         return "pages/login";
     }
 
+    @GetMapping("/setting")
+    public String setting(){
+        return "pages/system/setting";
+    }
 }

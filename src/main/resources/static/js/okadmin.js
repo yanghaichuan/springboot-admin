@@ -85,7 +85,7 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
          offset: 'r', //右边
          time: 200000, //2秒后自动关闭
          anim: -1,
-         content: "./pages/system/setting.html"
+         content: "/setting"
       });
    });
 
@@ -340,7 +340,7 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
       okLayer.confirm("确定要退出吗？", function (index) {
          okTab.removeTabStorage(function (res) {
             okTab.removeTabStorage();
-            window.location = "pages/login.html";
+            window.location = "/logout";
          });
       });
    });
@@ -411,6 +411,7 @@ layui.use(["element", "form", "layer", "okUtils", "okTab", "okLayer", "okContext
       //退出登录
       $("#lockQuit").click(function () {
          // window.location.href = "./pages/login.html";
+         debugger
          window.location.replace("./pages/login.html");  //替换当前页面
       });
    }
