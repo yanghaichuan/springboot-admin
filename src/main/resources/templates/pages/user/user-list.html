@@ -138,7 +138,7 @@
 					edit(data);
 					break;
 				case "del":
-					del(data.id);
+					del(data.userId);
 					break;
 			}
 		});
@@ -146,9 +146,21 @@
 		function batchEnabled() {
 			okLayer.confirm("确定要批量启用吗？", function (index) {
 				layer.close(index);
-				let idsStr = okUtils.tableBatchCheck(table);
+				let idsStr = '';
+				var checkStatus = table.checkStatus("tableId");
+				var rows = checkStatus.data.length;
+				if (rows > 0) {
+					for (var i = 0; i < checkStatus.data.length; i++) {
+
+						if(idsStr){
+							idsStr +=  ","+checkStatus.data[i].userId;
+						}else{
+							idsStr += checkStatus.data[i].userId
+						}
+					}
+				}
 				if (idsStr) {
-					okUtils.ajax("/user/normalUser", "put", {idsStr: idsStr}, true).done(function (response) {
+					okUtils.ajax("/user/normalUser", "put", idsStr, true).done(function (response) {
 						console.log(response);
 						okUtils.tableSuccessMsg(response.msg);
 					}).fail(function (error) {
@@ -161,9 +173,22 @@
 		function batchDisabled() {
 			okLayer.confirm("确定要批量停用吗？", function (index) {
 				layer.close(index);
-				let idsStr = okUtils.tableBatchCheck(table);
+				let idsStr = '';
+				var checkStatus = table.checkStatus("tableId");
+				var rows = checkStatus.data.length;
+				if (rows > 0) {
+					for (var i = 0; i < checkStatus.data.length; i++) {
+						if(idsStr){
+							idsStr +=  ","+checkStatus.data[i].userId;
+						}else{
+							idsStr += checkStatus.data[i].userId
+						}
+
+					}
+				}
+
 				if (idsStr) {
-					okUtils.ajax("/user/stopUser", "put", {idsStr: idsStr}, true).done(function (response) {
+					okUtils.ajax("/user/stopUser", "put", idsStr, true).done(function (response) {
 						console.log(response);
 						okUtils.tableSuccessMsg(response.msg);
 					}).fail(function (error) {
@@ -176,9 +201,22 @@
 		function batchDel() {
 			okLayer.confirm("确定要批量删除吗？", function (index) {
 				layer.close(index);
-				let idsStr = okUtils.tableBatchCheck(table);
+				let idsStr = '';
+				var checkStatus = table.checkStatus("tableId");
+				var rows = checkStatus.data.length;
+				if (rows > 0) {
+					for (var i = 0; i < checkStatus.data.length; i++) {
+						if(idsStr){
+							idsStr +=  ","+checkStatus.data[i].userId;
+						}else{
+							idsStr += checkStatus.data[i].userId
+						}
+
+					}
+				}
+
 				if (idsStr) {
-					okUtils.ajax("/user/deleteUser", "delete", {idsStr: idsStr}, true).done(function (response) {
+					okUtils.ajax("/user/deleteUser", "put", idsStr, true).done(function (response) {
 						console.log(response);
 						okUtils.tableSuccessMsg(response.msg);
 					}).fail(function (error) {
@@ -205,7 +243,7 @@
 
 		function del(id) {
 			okLayer.confirm("确定要删除吗？", function () {
-				okUtils.ajax("/user/deleteUser", "delete", {idsStr: id}, true).done(function (response) {
+				okUtils.ajax("/user/deleteUser", "put", ''+id, true).done(function (response) {
 					console.log(response);
 					okUtils.tableSuccessMsg(response.msg);
 				}).fail(function (error) {

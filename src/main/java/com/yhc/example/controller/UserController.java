@@ -22,6 +22,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -168,11 +169,86 @@ public class UserController {
      *
      * @return
      */
-    @DeleteMapping("/userDel")
-    @RequiresPermissions("user:del")//权限管理;
+    @PutMapping("/deleteUser")
     @ResponseBody
-    public String userDel() {
-        return "userDel";
+    public AjaxResult userDel(@RequestBody String userIds) {
+        if(userIds !=null && !userIds.isEmpty()){
+            String [] ids = userIds.split(",");
+            List<Integer> userList = new ArrayList<>();
+            for(String id:ids){
+                if(Integer.parseInt(id)==1){
+                    return AjaxResult.error("管理员不可以停用");
+                }
+                userList.add(Integer.parseInt(id));
+            }
+
+           boolean flag= iUserService.removeByIds(userList);
+            if(!flag){
+                return AjaxResult.error(UserMsgContants.ERROR);
+            }
+        }
+        return AjaxResult.success(UserMsgContants.SUCCESS);
     }
+
+
+    /**
+     * 用户添加;
+     * @return
+     */
+    @PutMapping("/stopUser")
+    @ResponseBody
+    public AjaxResult stopUser(@RequestBody String userIds) {
+        if(userIds !=null && !userIds.isEmpty()){
+            String [] ids = userIds.split(",");
+            List<User> userList = new ArrayList<>();
+            for(String id:ids){
+                if(Integer.parseInt(id)==1){
+                    return AjaxResult.error("管理员不可以停用");
+                }
+                User user = new User();
+                user.setState(1);
+                user.setUserId(Integer.parseInt(id));
+                userList.add(user);
+            }
+            if(!userList.isEmpty()){
+                boolean flag = iUserService.updateBatchById(userList);
+                if(!flag){
+                    return AjaxResult.error(UserMsgContants.ERROR);
+                }
+            }
+
+        }
+
+        return AjaxResult.success(UserMsgContants.SUCCESS);
+    }
+
+
+    @PutMapping("/normalUser")
+    @ResponseBody
+    public AjaxResult normalUser(@RequestBody String userIds) {
+        if(userIds !=null && !userIds.isEmpty()){
+            String [] ids = userIds.split(",");
+            List<User> userList = new ArrayList<>();
+            for(String id:ids){
+                if(Integer.parseInt(id)==1){
+                    return AjaxResult.error("管理员不可以停用");
+                }
+                User user = new User();
+                user.setState(0);
+                user.setUserId(Integer.parseInt(id));
+                userList.add(user);
+            }
+            if(!userList.isEmpty()){
+                boolean flag = iUserService.updateBatchById(userList);
+                if(!flag){
+                    return AjaxResult.error(UserMsgContants.ERROR);
+                }
+            }
+
+        }
+
+        return AjaxResult.success(UserMsgContants.SUCCESS);
+    }
+
 
 }
