@@ -83,7 +83,7 @@ layui.define(["layer"], function (exprots) {
          var deferred = $.Deferred();
          var loadIndex;
          $.ajax({
-            url: okUtils.isFrontendBackendSeparate ? okUtils.baseUrl + url : url,
+            url: url || okUtils.baseUrl + url,
             type: type || "get",
             data: params || {},
             dataType: "json",

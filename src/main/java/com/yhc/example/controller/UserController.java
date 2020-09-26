@@ -1,11 +1,14 @@
 package com.yhc.example.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
 import com.yhc.example.bean.AjaxResult;
+import com.yhc.example.bean.BeanEmptyUtil;
 import com.yhc.example.bean.TableDataInfo;
 import com.yhc.example.constant.SystemConstants;
 import com.yhc.example.constant.UserConstants;
@@ -58,6 +61,15 @@ public class UserController {
     }
 
     /**
+     * 用户修改
+     * @return
+     */
+    @GetMapping("/user-update")
+    public String edit() {
+        return "pages/user/user-update";
+    }
+
+    /**
      * 用户查询.
      *
      * @return
@@ -66,6 +78,11 @@ public class UserController {
     @ResponseBody
     public TableDataInfo listUsers(@RequestParam(required = false, defaultValue = "1") Integer pageNo,
                                    @RequestParam(required = false, defaultValue = "10") Integer pageSize,User user) {
+        try{
+            BeanEmptyUtil.setNullValue(user);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.setEntity(user);
         IPage<User> page = new Page<>(pageNo, pageSize);
@@ -83,21 +100,63 @@ public class UserController {
      * @return
      */
     @PostMapping("/userAdd")
-    @RequiresPermissions("user:add")//权限管理;
     @ResponseBody
-    public AjaxResult userInfoAdd(@RequestBody User user) {
+    public AjaxResult userInfoAdd(User user) {
         if (user.getUserName().isEmpty()) {
             return AjaxResult.error(UserMsgContants.USER_NEME_ISEMPTY);
         }
         if (user.getPassword().isEmpty()) {
             return AjaxResult.error(UserMsgContants.USER_PWD_ISEMPTY);
         }
-        user.setState(Integer.parseInt(UserConstants.NORMAL));
+
+        User user1 = iUserService.findByUsername(user.getUserName());
+        if(user1!=null){
+            return AjaxResult.error(UserMsgContants.USER_NEME_EXISTS);
+        }
+        if(user.getState()==null){
+            user.setState(Integer.parseInt(UserConstants.USER_DISABLE));
+        }
         String pwd = MD5Utils.encrypt(user.getUserName(), user.getPassword());
         user.setPassword(pwd);
         user.setSalt(MD5Utils.SALT);
         user.setCreateTime(new Date());
         boolean flag = iUserService.save(user);
+        if(!flag){
+            return AjaxResult.error(UserMsgContants.ERROR);
+        }
+        return AjaxResult.success(UserMsgContants.SUCCESS);
+    }
+
+
+    /**
+     * 用户添加;
+     *
+     * @return
+     */
+    @PostMapping("/updateUser")
+    @ResponseBody
+    public AjaxResult userInfoUpdate(User user) {
+
+        if (user.getUserName().isEmpty()) {
+            return AjaxResult.error(UserMsgContants.USER_NEME_ISEMPTY);
+        }
+        if (user.getPassword().isEmpty()) {
+            return AjaxResult.error(UserMsgContants.USER_PWD_ISEMPTY);
+        }
+
+        if(user.getState()==null){
+            user.setState(Integer.parseInt(UserConstants.USER_DISABLE));
+        }
+
+        String pwd = MD5Utils.encrypt(user.getUserName(), user.getPassword());
+        user.setPassword(pwd);
+        user.setSalt(MD5Utils.SALT);
+        user.setUpdateTime(new Date());
+
+        UpdateWrapper updateWrapper= new UpdateWrapper();
+        updateWrapper.eq("userId",user.getUserId());
+
+        boolean flag = iUserService.update(user,updateWrapper);
         if(!flag){
             return AjaxResult.error(UserMsgContants.ERROR);
         }
