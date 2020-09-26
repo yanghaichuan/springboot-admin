@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@MapperScan("com.yhc.example.domain.mapper")
+@MapperScan({"com.yhc.example.domain.mapper","com.yhc.example.**.mapper"})
 public class SpringBooAdminApplication {
 
     public static void main(String[] args) {
