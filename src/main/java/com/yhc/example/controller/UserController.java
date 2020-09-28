@@ -16,6 +16,7 @@ import com.yhc.example.constant.UserMsgContants;
 import com.yhc.example.domain.entity.User;
 import com.yhc.example.service.IUserService;
 import com.yhc.example.util.MD5Utils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -248,6 +249,17 @@ public class UserController {
         }
 
         return AjaxResult.success(UserMsgContants.SUCCESS);
+    }
+
+
+
+    @GetMapping("/getUser")
+    @ResponseBody
+    public AjaxResult getUser(){
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        user.setPassword(null);
+        user.setSalt(null);
+        return AjaxResult.success(user);
     }
 
 

@@ -63,7 +63,6 @@
          <li class="no-line layui-nav-item">
             <a href="javascript:">
                <img src="images/avatar.png" class="layui-nav-img">
-               bobi
             </a>
             <dl id="userInfo" class="layui-nav-child">
 <!--               <dd><a lay-id="u-1" href="javascript:" data-url="pages/member/user.html">个人中心<span-->
@@ -215,5 +214,19 @@
 <script src="lib/layui/layui.js"></script>
 <script src="js/snowflake.js?snowflake=雪花"></script>
 <script src="js/okadmin.js"></script>
+<script>
+   layui.use(["okUtils"], function () {
+      let $ = layui.jquery;
+      let okUtils = layui.okUtils;
+
+      okUtils.ajax("/user/getUser").done(function (response) {
+         if(response.code == 0){
+            $(".userName").text(response.data.name);
+         }
+      }).fail(function (error) {
+         console.log(error)
+      })
+   });
+ </script>
 </body>
 </html>
