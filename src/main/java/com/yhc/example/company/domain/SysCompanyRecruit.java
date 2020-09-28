@@ -2,6 +2,9 @@ package com.yhc.example.company.domain;
 
 import java.io.Serializable;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -29,6 +32,7 @@ public class SysCompanyRecruit implements Serializable {
     /**
      * id
      */
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -51,6 +55,8 @@ public class SysCompanyRecruit implements Serializable {
     /**
      * 招聘人数
      */
+
+    @TableField("recruit_number")
     private Integer recruitNumber;
 
     /**
@@ -86,6 +92,7 @@ public class SysCompanyRecruit implements Serializable {
     /**
      * 创建时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 

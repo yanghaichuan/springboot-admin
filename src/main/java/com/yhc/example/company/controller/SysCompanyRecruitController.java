@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -68,13 +69,14 @@ public class SysCompanyRecruitController {
     @PostMapping("/save")
     @ResponseBody
     public AjaxResult save(SysCompanyRecruit sysCompanyRecruit) {
+        sysCompanyRecruit.setCreateTime(new Date());
         if(sysCompanyRecruit.getStatus() == null){
             sysCompanyRecruit.setStatus("1");
         }
         if (sysCompanyRecruit.getId() != null) {
             SysCompanyRecruit sysCompanyRecruit1 = sysCompanyRecruitService.getOne(new QueryWrapper<SysCompanyRecruit>().eq("id", sysCompanyRecruit.getId()));
             if (sysCompanyRecruit1 != null) {
-                sysCompanyRecruitService.updateById(sysCompanyRecruit1);
+                sysCompanyRecruitService.updateById(sysCompanyRecruit);
                 return AjaxResult.success();
             }
         }else{
