@@ -91,8 +91,8 @@ public class DruidDataSourceConfig {
     @Value("${spring.datasource.filters}")
     private String filters;
 
-    @Value("${spring.datasource.connectionProperties}")
-    private String connectionProperties;
+//    @Value("${spring.datasource.connectionProperties}")
+//    private String connectionProperties;
 
     @Bean
     @Primary  //在同样的DataSource中，首先使用被标注的DataSource
@@ -121,7 +121,7 @@ public class DruidDataSourceConfig {
         } catch (SQLException e) {
             log.error("druid配置初始化失败", e);
         }
-        datasource.setConnectionProperties(connectionProperties);
+//        datasource.setConnectionProperties(connectionProperties);
 
         return datasource;
     }
