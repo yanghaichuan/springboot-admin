@@ -9,7 +9,7 @@ server:
         uri-encoding: UTF-8
 spring:
     datasource:
-        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKPYsCl3alwZlRb1vKoFdVu0LP3Nm/+vH5iOWxI83pkUbrQc13Lxz/VT3D+H+ziaUpUsA+ZjG4iZGTDJWZnP8kcCAwEAAQ==
+#        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000;config.decrypt=true;config.decrypt.key=MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKPYsCl3alwZlRb1vKoFdVu0LP3Nm/+vH5iOWxI83pkUbrQc13Lxz/VT3D+H+ziaUpUsA+ZjG4iZGTDJWZnP8kcCAwEAAQ==
         driver-class-name: com.mysql.cj.jdbc.Driver
         filters: config,stat,wall,slf4j
         initialSize: 5
@@ -18,7 +18,6 @@ spring:
         maxWait: 60000
         minEvictableIdleTimeMillis: 300000
         minIdle: 5
-        password: kGJF6c+pzVsf49LGs01ss0yijBGXIpNEp20cMkNCQo3ONaeMNPeoW9M89v+nGeiWs95/D2Ms59uGyydDGUWpmg==
         poolPreparedStatements: true
         testOnBorrow: false
         testOnReturn: false
@@ -27,6 +26,10 @@ spring:
         type: com.alibaba.druid.pool.DruidDataSource
         url: jdbc:mysql://localhost:3306/employ-admin?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=true&serverTimezone=UTC
         username: yhc_db
+        password: 123456
+#        url: jdbc:mysql://rm-8vbleewc36omg995z3o.mysql.zhangbei.rds.aliyuncs.com:3306/employ-admin?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+#        username: root
+#        password: YangZai@0527
         validationQuery: SELECT 1 FROM DUAL
     thymeleaf:
       cache: false

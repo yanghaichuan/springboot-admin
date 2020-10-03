@@ -21,4 +21,13 @@ public class BaseController {
     public String setting(){
         return "pages/system/setting";
     }
+
+    /**
+     * 基本信息
+     * @return
+     */
+    @GetMapping("/userInfo")
+    public String userInfo() {
+        return "pages/user/user-info";
+    }
 }

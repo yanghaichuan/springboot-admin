@@ -46,6 +46,8 @@ public class User implements Serializable {
 
     private String salt;
 
+    private String url;
+
     private Integer state;
 
     @TableField("expiredDate")

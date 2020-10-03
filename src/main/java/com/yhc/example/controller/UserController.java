@@ -165,6 +165,24 @@ public class UserController {
         return AjaxResult.success(UserMsgContants.SUCCESS);
     }
 
+
+    /**
+     * 用户添加;
+     *
+     * @return
+     */
+    @PostMapping("/userInfoEdit")
+    @ResponseBody
+    public AjaxResult userInfoEdit(User user) {
+        UpdateWrapper updateWrapper= new UpdateWrapper();
+        updateWrapper.eq("userId",user.getUserId());
+        boolean flag = iUserService.update(user,updateWrapper);
+        if(!flag){
+            return AjaxResult.error(UserMsgContants.ERROR);
+        }
+        return AjaxResult.success(UserMsgContants.SUCCESS);
+    }
+
     /**
      * 用户删除;
      *
@@ -259,6 +277,9 @@ public class UserController {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         user.setPassword(null);
         user.setSalt(null);
+        if(user!=null){
+            user = iUserService.getById(user.getUserId());
+        }
         return AjaxResult.success(user);
     }
 

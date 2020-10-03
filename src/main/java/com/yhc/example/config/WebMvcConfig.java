@@ -1,5 +1,6 @@
 package com.yhc.example.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -12,6 +13,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
+    @Value("${upload.profile}")
+    private String profile;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         //视图映射：浏览器发送"/"请求，会来到index页面（thymeleaf解析的页面），
@@ -26,5 +30,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
+        /** 本地文件上传路径 */
+        registry.addResourceHandler("/profile"+ "/**").addResourceLocations("file:" + profile + "/");
     }
 }
