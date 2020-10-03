@@ -84,6 +84,8 @@
 				{field: "id", title: "ID", width: 80, sort: true},
 				{field: "company", title: "企业名称", width: 100},
 				{field: "companyCode", title: "企业编码", width: 100},
+				{field: "companyType", title: "单位类型", width: 100,templet: "#typeTpl"},
+
 				{field: "companyAdress", title: "联系地址", width: 200},
 				{field: "companyScale", title: "规模", width: 100, templet: "#scaleTpl"},
 				{field: "mobile", title: "联系电话", width: 100},
@@ -204,6 +206,21 @@
 	<span class="layui-btn layui-btn-danger layui-btn-xs">超大规模</span>
 	{{#  } }}
 </script>
+
+<script type="text/html" id="typeTpl">
+	{{#  if(d.companyType == 1){ }}
+	<span class="layui-btn layui-btn-normal layui-btn-xs">国企</span>
+	{{#  } else if(d.companyType == 2) { }}
+	<span class="layui-btn layui-btn-warm layui-btn-xs">民企</span>
+	{{#  } else if(d.companyType == 3) { }}
+	<span class="layui-btn layui-btn-danger layui-btn-xs">外资</span>
+	{{#  } else if(d.companyType == 4) { }}
+	<span class="layui-btn layui-btn-danger layui-btn-xs">中外合资</span>
+	{{#  } else if(d.companyType == 9) { }}
+	<span class="layui-btn layui-btn-danger layui-btn-xs">其他</span>
+	{{#  } }}
+</script>
+
 
 </body>
 </html>

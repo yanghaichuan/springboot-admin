@@ -36,6 +36,12 @@ public class SysCompany implements Serializable {
     private String company;
 
     /**
+     * 单位类型1国企2民企3外企4中外合资9其他
+     */
+    private String companyType;
+
+
+    /**
      * 地址
      */
     private String companyAdress;
