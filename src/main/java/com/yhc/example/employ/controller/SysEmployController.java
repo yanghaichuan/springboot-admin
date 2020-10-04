@@ -1,13 +1,16 @@
 package com.yhc.example.employ.controller;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.yhc.example.bean.AjaxResult;
 import com.yhc.example.bean.BeanEmptyUtil;
 import com.yhc.example.bean.TableDataInfo;
 import com.yhc.example.constant.SystemConstants;
 import com.yhc.example.constant.UserMsgContants;
 import com.yhc.example.employ.domain.SysEmploy;
+import com.yhc.example.employ.domain.SysEmployCount;
 import com.yhc.example.employ.service.ISysEmployService;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -145,6 +148,25 @@ public class SysEmployController {
         tableDataInfo.setData(page.getRecords());
         //返回结果
         return tableDataInfo;
+    }
+
+    @GetMapping("/count")
+    @ResponseBody
+    public AjaxResult count() {
+        List<SysEmployCount> sysEmployCounts = sysEmployService.selectSysEmployCount();
+        List<String> stringList = new ArrayList<>();
+        List<Integer> integerList = new ArrayList<>();
+        JSONObject jsObject = new JSONObject();
+
+        if(!sysEmployCounts.isEmpty()){
+            for(int i=sysEmployCounts.size()-1;i>=0;i--){
+                stringList.add(sysEmployCounts.get(i).getEmployTime());
+                integerList.add(sysEmployCounts.get(i).getEmployNum());
+            }
+        }
+        jsObject.put("stringList",stringList);
+        jsObject.put("integerList",integerList);
+        return AjaxResult.success(jsObject);
     }
 
 }
