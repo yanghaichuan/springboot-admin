@@ -10,14 +10,27 @@ layui.use(["okUtils", "table", "okCountUp", "okMock"], function () {
      * 收入、商品、博客、用户
      */
     function statText() {
-        var elem_nums = $(".stat-text");
-        elem_nums.each(function (i, j) {
-            var ran = parseInt(Math.random() * 99 + 1);
-            !new countUp({
-                target: j,
-                endVal: 20 * ran
-            }).start();
-        });
+        // var elem_nums = $(".stat-text");
+        // elem_nums.each(function (i, j) {
+        //     var ran = parseInt(Math.random() * 99 + 1);
+        //     !new countUp({
+        //         target: j,
+        //         endVal: 20 * ran
+        //     }).start();
+        // });
+        okUtils.ajax("/company/statNumber").done(function (response) {
+            if(response.code == 0){
+                $(".incomes-num").text(response.data.company);
+
+                $(".goods-num").text(response.data.recruit);
+
+                $(".fans-num").text(response.data.users);
+
+                $(".blogs-num").text(response.data.message);
+            }
+        }).fail(function (error) {
+            console.log(error)
+        })
     }
 
     var userSourceOption = {
@@ -52,18 +65,19 @@ layui.use(["okUtils", "table", "okCountUp", "okMock"], function () {
     function userList() {
         table.render({
             method: "get",
-            url: okMock.api.user.list,
-            elem: '#userData',
+            url: '/company/recruit/list',
+            elem: '#recruitData',
             height: 340,
             page: true,
             limit: 7,
             cols: [[
-                {field: "id", title: "ID", width: 180},
-                {field: "username", title: "账号", width: 100},
-                {field: "password", title: "密码", width: 80},
-                {field: "email", title: "邮箱", width: 200},
-                {field: "createTime", title: "创建时间", width: 180},
-                {field: "logins", title: "登录次数", width: 100}
+                {field: "id", title: "ID", width: 80, sort: true},
+                {field: "title", title: "标题", width: 150},
+                {field: "company", title: "单位名称", width: 100},
+                {field: "expiredTime", title: "截止日期", width: 150},
+                {field: "recruitNumber", title: "招聘人数", width: 100},
+                {field: "recruitPost", title: "招聘岗位", width: 100},
+                {field: "recruitInfo", title: "招聘内容", width: 200}
             ]],
 //             parseData: function (res) {
 //                 res.data.list.forEach(function (i, j) {
