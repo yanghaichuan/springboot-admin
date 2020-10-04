@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="utf-8">
 	<title>预览</title>
@@ -12,6 +12,17 @@
 	<!--form表单-->
 	<form class="layui-form layui-form-pane ok-form" lay-filter="filter">
 		<input type="hidden" name="id"/>
+
+		<div class="layui-form-item">
+			<label class="layui-form-label">选择单位</label>
+			<div class="layui-input-block">
+				<select name="company"  lay-verify="required" id="compT">
+					<option></option>
+					<option th:each="comp:${companyList}" th:value="${comp.id}"
+							th:text="${comp.company}"></option>
+				</select>
+			</div>
+		</div>
 
 		<div class="layui-form-item layui-form-text">
 			<label class="layui-form-label">留言类容</label>
@@ -54,7 +65,7 @@
 		});
 
 		form.on("submit(edit)", function (data) {
-			okUtils.ajax("/company/recruit/save", "post", data.field, true).done(function (response) {
+			okUtils.ajax("/company/message/save", "post", data.field, true).done(function (response) {
 				okLayer.greenTickMsg(response.msg, function () {
 					parent.layer.close(parent.layer.getFrameIndex(window.name));
 				});

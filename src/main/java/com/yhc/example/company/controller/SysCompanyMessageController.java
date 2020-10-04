@@ -17,6 +17,7 @@ import com.yhc.example.domain.entity.User;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -36,6 +37,9 @@ public class SysCompanyMessageController {
     @Autowired
     private ISysCompanyMessageService sysCompanyMessageService;
 
+    @Autowired
+    private ISysCompanyService sysCompanyService;
+
     /**
      * 列表
      * @return
@@ -52,7 +56,11 @@ public class SysCompanyMessageController {
      * @return
      */
     @GetMapping("/message-insert")
-    public String insert() {
+    public String insert(Model model) {
+        QueryWrapper<SysCompany> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status",0);
+        List<SysCompany> sysCompanyList = sysCompanyService.list(queryWrapper);
+        model.addAttribute("companyList",sysCompanyList);
         return "pages/company/message-insert";
     }
 
@@ -61,7 +69,11 @@ public class SysCompanyMessageController {
      * @return
      */
     @GetMapping("/message-update")
-    public String edit() {
+    public String edit(Model model) {
+        QueryWrapper<SysCompany> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status",0);
+        List<SysCompany> sysCompanyList = sysCompanyService.list(queryWrapper);
+        model.addAttribute("companyList",sysCompanyList);
         return "pages/company/message-update";
     }
 
@@ -75,13 +87,23 @@ public class SysCompanyMessageController {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         if(user!=null){
             sysCompanyMessage.setCreateUser(user.getUserName());
+            sysCompanyMessage.setName(user.getUserName());
         }
+        if(sysCompanyMessage.getCompany()!=null){
+            QueryWrapper<SysCompany> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("id",sysCompanyMessage.getCompany());
+            SysCompany sysCompany = sysCompanyService.getOne(queryWrapper);
+            if(sysCompany!=null){
+                sysCompanyMessage.setCompanyName(sysCompany.getCompany());
+            }
+        }
+
         sysCompanyMessage.setCreateTime(new Date());
         if (sysCompanyMessage.getId() != null) {
             sysCompanyMessage.setStatus("0");
             SysCompanyMessage sysCompanyMessage1 = sysCompanyMessageService.getOne(new QueryWrapper<SysCompanyMessage>().eq("id", sysCompanyMessage.getId()));
             if (sysCompanyMessage1 != null) {
-                sysCompanyMessageService.updateById(sysCompanyMessage1);
+                sysCompanyMessageService.updateById(sysCompanyMessage);
                 return AjaxResult.success();
             }
         }else{
