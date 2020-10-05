@@ -77,6 +77,19 @@ public class SysCompanyMessageController {
         return "pages/company/message-update";
     }
 
+    /**
+     * 修改
+     * @return
+     */
+    @GetMapping("/message-view")
+    public String view(Model model) {
+        QueryWrapper<SysCompany> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status",0);
+        List<SysCompany> sysCompanyList = sysCompanyService.list(queryWrapper);
+        model.addAttribute("companyList",sysCompanyList);
+        return "pages/company/message-view";
+    }
+
 
     /**
      * 新增或编辑
@@ -141,11 +154,13 @@ public class SysCompanyMessageController {
     /**
      * 查询
      */
-    @PutMapping("/find")
+    @GetMapping("/find")
     @ResponseBody
     public AjaxResult find(int id) {
         SysCompanyMessage sysCompanyMessage = sysCompanyMessageService.getOne(new QueryWrapper<SysCompanyMessage>().eq("id", id));
         if (sysCompanyMessage != null) {
+            sysCompanyMessage.setStatus("1");
+            sysCompanyMessageService.updateById(sysCompanyMessage);
             return AjaxResult.success(sysCompanyMessage);
         } else {
             return AjaxResult.error("没有找到该对象");

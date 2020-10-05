@@ -103,7 +103,7 @@ layui.use(["okUtils", "table", "okCountUp", "okMock"], function () {
     }
 
     var userLocationOption = {
-        "title": {"text": "用户家庭所在地统计", "subtext": "", "x": "center"},
+        "title": {"text": "企业所在地统计", "subtext": "", "x": "center"},
         "tooltip": {"trigger": "item"},
         "visualMap": {
             "color": ["#eeeeee"], "show": false, "x": "left", "y": "center",
@@ -118,7 +118,7 @@ layui.use(["okUtils", "table", "okCountUp", "okMock"], function () {
         },
         "series": [
             {
-                "name": "用户家庭所在地统计", "roam": true, "type": "map", "mapType": "china", "data": [],
+                "name": "企业所在地统计", "roam": true, "type": "map", "mapType": "china", "data": [],
                 "itemStyle": {
                     "normal": {"areaColor": "#eeeeee", "borderColor": "#aaaaaa", "borderWidth": 0.5},
                     "emphasis": {"areaColor": "rgba(63,177,227,0.25)", "borderColor": "#3fb1e3", "borderWidth": 1}

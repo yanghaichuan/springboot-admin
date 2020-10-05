@@ -114,7 +114,7 @@ public class SysEmployController {
     /**
      * 查询
      */
-    @PutMapping("/find")
+    @GetMapping("/find")
     @ResponseBody
     public AjaxResult find(int id) {
         SysEmploy sysEmploy = sysEmployService.getOne(new QueryWrapper<SysEmploy>().eq("id", id));

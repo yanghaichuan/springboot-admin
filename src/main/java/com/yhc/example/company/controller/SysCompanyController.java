@@ -127,7 +127,7 @@ public class SysCompanyController {
     /**
      * 查询
      */
-    @PutMapping("/find")
+    @GetMapping("/find")
     @ResponseBody
     public AjaxResult find(int id) {
         SysCompany sysCompany = sysCompanyService.getOne(new QueryWrapper<SysCompany>().eq("id", id));
