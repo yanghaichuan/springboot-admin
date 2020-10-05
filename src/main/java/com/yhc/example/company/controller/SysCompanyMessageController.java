@@ -160,6 +160,11 @@ public class SysCompanyMessageController {
         SysCompanyMessage sysCompanyMessage = sysCompanyMessageService.getOne(new QueryWrapper<SysCompanyMessage>().eq("id", id));
         if (sysCompanyMessage != null) {
             sysCompanyMessage.setStatus("1");
+            if(sysCompanyMessage.getOpenNum()==null){
+                sysCompanyMessage.setOpenNum(1);
+            }else{
+                sysCompanyMessage.setOpenNum(sysCompanyMessage.getOpenNum()+1);
+            }
             sysCompanyMessageService.updateById(sysCompanyMessage);
             return AjaxResult.success(sysCompanyMessage);
         } else {
