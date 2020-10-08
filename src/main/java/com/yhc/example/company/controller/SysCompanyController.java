@@ -15,6 +15,8 @@ import com.yhc.example.company.service.ISysCompanyRecruitService;
 import com.yhc.example.company.service.ISysCompanyService;
 import com.yhc.example.constant.SystemConstants;
 import com.yhc.example.constant.UserMsgContants;
+import com.yhc.example.employ.domain.SysEmploy;
+import com.yhc.example.employ.service.ISysEmployService;
 import com.yhc.example.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,6 +47,9 @@ public class SysCompanyController {
 
     @Autowired
     private ISysCompanyMessageService sysCompanyMessageService;
+
+    @Autowired
+    private ISysEmployService sysEmployService;
 
     /**
      * 列表
@@ -181,7 +186,10 @@ public class SysCompanyController {
         int count2 = sysCompanyRecruitService.count(queryWrapper1);
         jsonObject.put("recruit",count2);
 
-        int count3 = iUserService.count();
+
+        QueryWrapper<SysEmploy> queryWrapper2 = new QueryWrapper<>();
+        queryWrapper2.eq("status",0);
+        int count3 = sysEmployService.count(queryWrapper2);
         jsonObject.put("users",count3);
 
         int count4 = sysCompanyMessageService.count();
