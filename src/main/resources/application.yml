@@ -16,6 +16,6 @@ upload:
   # 实例演示开关
   demoEnabled: true
   # 文件路径 示例（ Windows配置D:/equ/transfer/uploadPath，Linux配置 /root/apps/uploadPath）
-  profile: D:/equ/transfer/uploadPath/
+  profile: D:/uploadPath/
   # 获取ip地址开关
   addressEnabled: false
