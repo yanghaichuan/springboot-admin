@@ -1,6 +1,6 @@
 package com.yhc.example.util;
 
-import com.yhc.example.domain.vo.TreeBean;
+import com.yhc.example.system.domain.vo.TreeBean;
 
 import java.util.ArrayList;
 import java.util.Iterator;

@@ -1,7 +1,7 @@
 package com.yhc.example.common;
 
 
-import com.yhc.example.bean.Response;
+import com.yhc.example.common.bean.Response;
 import com.yhc.example.common.exception.LoginException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.UnauthorizedException;

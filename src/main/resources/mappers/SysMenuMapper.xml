@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.yhc.example.domain.mapper.SysMenuMapper">
+<mapper namespace="com.yhc.example.system.domain.mapper.SysMenuMapper">
 
-    <resultMap id="BaseResultMap" type="com.yhc.example.domain.entity.SysMenu" >
+    <resultMap id="BaseResultMap" type="com.yhc.example.system.domain.entity.SysMenu" >
         <result column="menu_id" property="menuId" />
         <result column="menu_name" property="menuName" />
         <result column="parent_id" property="parentId" />
@@ -27,7 +27,7 @@
                 createtime
     </sql>
 
-    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.yhc.example.domain.entity.SysMenu">
+    <insert id="insert" useGeneratedKeys="true" keyColumn="id" keyProperty="id" parameterType="com.yhc.example.system.domain.entity.SysMenu">
         INSERT INTO sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test ='null != menuId'>
@@ -94,7 +94,7 @@
         WHERE id = #{id}
     </delete>
 
-    <update id="update" parameterType="com.yhc.example.domain.entity.SysMenu">
+    <update id="update" parameterType="com.yhc.example.system.domain.entity.SysMenu">
         UPDATE sys_menu
         <set>
             <if test ='null != menuId'>menu_id = #{menuId},</if>

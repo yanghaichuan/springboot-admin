@@ -3,7 +3,7 @@ mybatis-plus:
         map-underscore-to-camel-case: true
         use-generated-keys: true
     mapper-locations: classpath*:/mappers/**/*.xml
-    type-aliases-package: com.yhc.example.domain.entity
+    type-aliases-package: com.yhc.example.system.domain.entity
 server:
     tomcat:
         uri-encoding: UTF-8

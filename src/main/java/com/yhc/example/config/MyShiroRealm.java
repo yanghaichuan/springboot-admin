@@ -1,11 +1,11 @@
 package com.yhc.example.config;
 
-import com.yhc.example.domain.entity.Permission;
-import com.yhc.example.domain.entity.Role;
-import com.yhc.example.domain.entity.User;
-import com.yhc.example.service.IPermissionService;
-import com.yhc.example.service.IRoleService;
-import com.yhc.example.service.IUserService;
+import com.yhc.example.system.domain.entity.Permission;
+import com.yhc.example.system.domain.entity.Role;
+import com.yhc.example.system.domain.entity.User;
+import com.yhc.example.system.service.IPermissionService;
+import com.yhc.example.system.service.IRoleService;
+import com.yhc.example.system.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -40,7 +40,7 @@ public class MyShiroRealm extends AuthorizingRealm {
 
 
     /**
-     * 
+     *
      * description: 授权
      * create time: 2019/7/1 10:32
      *
@@ -70,7 +70,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     }
 
     /**
-     * 
+     *
      * description: 主要是用来进行身份认证的，也就是说验证用户输入的账号和密码是否正确。
      * create time: 2019/7/1 09:04
      *
