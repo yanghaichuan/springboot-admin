@@ -41,34 +41,6 @@ public class UserController {
 
 
     /**
-     * 用户列表
-     * @return
-     */
-    @GetMapping("/user-list")
-    public String list() {
-        return "pages/user/user-list";
-    }
-
-
-    /**
-     * 用户新增
-     * @return
-     */
-    @GetMapping("/user-insert")
-    public String add() {
-        return "pages/user/user-insert";
-    }
-
-    /**
-     * 用户修改
-     * @return
-     */
-    @GetMapping("/user-update")
-    public String edit() {
-        return "pages/user/user-update";
-    }
-
-    /**
      * 用户查询.
      *
      * @return

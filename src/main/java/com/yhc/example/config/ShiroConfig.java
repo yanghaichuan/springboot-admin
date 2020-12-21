@@ -70,12 +70,21 @@ public class ShiroConfig {
         map.put("/js/**", "anon");
         map.put("/lib/**", "anon");
         map.put("/logout", "logout");
-        //登录
+//前后端不分离设置开始
+//        //登录
+//        shiroFilterFactoryBean.setLoginUrl("/");
+//        // 登录成功后要跳转的链接, 此项目是前后端分离，故此行注释掉，登录成功之后返回用户基本信息及token给前端
+//        shiroFilterFactoryBean.setSuccessUrl("index");
+//        //错误页面，认证不通过跳转
+//        shiroFilterFactoryBean.setUnauthorizedUrl("/error");
+//前后端不分离设置结束
+
+        // 如果不设置默认会自动寻找Web工程根目录下的"/system.jsp"页面
+        // 配器shirot认登录累面地址，前后端分离中登录累面跳转应由前端路由控制，后台仅返回json数据, 对应LoginController中unauth请求
         shiroFilterFactoryBean.setLoginUrl("/");
-        //首页
-        shiroFilterFactoryBean.setSuccessUrl("index");
-        //错误页面，认证不通过跳转
-        shiroFilterFactoryBean.setUnauthorizedUrl("/error");
+        // 未授权界面, 对应LoginController中 unauthorized 请求
+        shiroFilterFactoryBean.setUnauthorizedUrl("/unauthorized");
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(map);
         return shiroFilterFactoryBean;
     }
