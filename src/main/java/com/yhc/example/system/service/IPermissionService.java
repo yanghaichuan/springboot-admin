@@ -10,7 +10,7 @@ import java.util.List;
  *  服务类
  * </p>
  *
- * @author leigq
+ * @author test
  * @since 2019-06-28
  */
 public interface IPermissionService extends IService<Permission> {

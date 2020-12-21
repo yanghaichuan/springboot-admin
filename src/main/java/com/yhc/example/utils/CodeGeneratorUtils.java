@@ -1,4 +1,4 @@
-package com.yhc.example.util;
+package com.yhc.example.utils;
 
 import com.baomidou.mybatisplus.core.exceptions.MybatisPlusException;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
@@ -9,10 +9,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 
-import java.sql.Driver;
 import java.util.*;
 
 /**
@@ -22,7 +19,7 @@ import java.util.*;
  * <br/>
  * 详见：https://mp.baomidou.com/guide/generator.html
  * <p>
- * 创建人：LeiGQ <br>
+ * 创建人：test <br>
  * 创建时间：2019-06-14 11:03 <br>
  * <p>
  * 修改人： <br>

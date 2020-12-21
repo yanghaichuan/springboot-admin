@@ -1,4 +1,4 @@
-package com.yhc.example.util;
+package com.yhc.example.utils;
 
 import com.yhc.example.system.domain.vo.TreeBean;
 

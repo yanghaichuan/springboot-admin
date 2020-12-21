@@ -4,7 +4,7 @@ import com.yhc.example.common.bean.Response;
 import com.yhc.example.system.domain.entity.SysMenu;
 import com.yhc.example.system.domain.mapper.SysMenuMapper;
 import com.yhc.example.system.domain.vo.MenuBean;
-import com.yhc.example.util.TreeBeanUtils;
+import com.yhc.example.utils.TreeBeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

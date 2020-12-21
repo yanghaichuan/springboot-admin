@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * @author ：leigq
+ * @author ：test
  * @date ：2019/6/28 16:31
  * @description：自定义 shiroRealm, 主要是重写其认证、授权
  */

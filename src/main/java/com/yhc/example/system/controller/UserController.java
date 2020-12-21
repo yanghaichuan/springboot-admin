@@ -14,7 +14,7 @@ import com.yhc.example.constant.UserConstants;
 import com.yhc.example.constant.UserMsgContants;
 import com.yhc.example.system.domain.entity.User;
 import com.yhc.example.system.service.IUserService;
-import com.yhc.example.util.MD5Utils;
+import com.yhc.example.utils.MD5Utils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

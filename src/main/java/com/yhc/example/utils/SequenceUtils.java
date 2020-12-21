@@ -1,4 +1,4 @@
-package com.yhc.example.util;
+package com.yhc.example.utils;
 
 /**
  * Created with IDEA2018.3

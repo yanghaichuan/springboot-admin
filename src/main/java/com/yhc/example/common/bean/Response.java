@@ -59,7 +59,7 @@ public class Response {
      * @param msg  处理结果信息
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:25 <br>
      */
     public Response success(String msg) {
@@ -74,7 +74,7 @@ public class Response {
      * @param data 返回数据
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:25 <br>
      */
     public Response success(Object data) {
@@ -90,7 +90,7 @@ public class Response {
      * @param data 返回数据
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:25 <br>
      */
     public Response success(String msg, Object data) {
@@ -107,7 +107,7 @@ public class Response {
      * @param data 返回数据
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:25 <br>
      */
     public Response success(HttpStatus httpStatus, String msg, Object data) {
@@ -125,7 +125,7 @@ public class Response {
      * @param msg 处理结果信息
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:22 <br>
      */
     public Response failure(String msg) {
@@ -140,7 +140,7 @@ public class Response {
      * @param data 返回数据
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:22 <br>
      */
     public Response failure(Object data) {
@@ -156,7 +156,7 @@ public class Response {
      * @param data 返回数据
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:22 <br>
      */
     public Response failure(String msg, Object data) {
@@ -173,7 +173,7 @@ public class Response {
      * @param data 返回数据
      * @return 响应对象
      * <p>
-     * @author ：LeiGQ <br>
+     * @author ：test <br>
      * @date ：2019-05-20 15:22 <br>
      */
     public Response failure(HttpStatus httpStatus, String msg, Object data) {

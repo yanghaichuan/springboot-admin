@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * 缓存用户信息
  * <br/>
- * @author     ：leigq
+ * @author     ：test
  * @date       ：2019/7/3 14:40
  */
 @Data

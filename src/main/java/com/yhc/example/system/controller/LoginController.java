@@ -2,7 +2,7 @@ package com.yhc.example.system.controller;
 
 import com.yhc.example.common.bean.AjaxResult;
 import com.yhc.example.common.bean.CacheUser;
-import com.yhc.example.util.MD5Utils;
+import com.yhc.example.utils.MD5Utils;
 import com.yhc.example.system.domain.entity.User;
 import com.yhc.example.system.service.IUserService;
 import lombok.extern.slf4j.Slf4j;
