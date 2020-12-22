@@ -52,7 +52,7 @@ public class SwaggerConfig {
                 //文档描述
                 .description("接口说明")
                 //服务条款URL
-                .termsOfServiceUrl("http://127.0.0.1:9568/")
+                .termsOfServiceUrl("http://39.101.210.34:9568/")
                 //版本号
                 .version("1.0。0")
                 .build();

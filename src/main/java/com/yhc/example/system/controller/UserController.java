@@ -15,6 +15,7 @@ import com.yhc.example.constant.UserMsgContants;
 import com.yhc.example.system.domain.entity.User;
 import com.yhc.example.system.service.IUserService;
 import com.yhc.example.utils.MD5Utils;
+import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -241,6 +242,7 @@ public class UserController {
 
 
     @GetMapping("/getUser")
+    @ApiOperation(value = "获取用户", notes = "获取用户")
     @ResponseBody
     public AjaxResult getUser(){
         User user = (User) SecurityUtils.getSubject().getPrincipal();
