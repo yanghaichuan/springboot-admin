@@ -2,6 +2,7 @@ package com.yhc.example.config.shiro;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -36,5 +37,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
         /** swagger配置 */
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    //配置跨域
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")     //允许的路径
+                .allowedMethods("*")     //允许的方法
+                .allowedOrigins("*")       //允许的网站
+                .allowedHeaders("*")     //允许的请求头
+                .allowCredentials(true)
+                .maxAge(3600);
     }
 }

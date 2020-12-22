@@ -54,7 +54,7 @@ public class SwaggerConfig {
                 //服务条款URL
                 .termsOfServiceUrl("http://39.101.210.34:9568/")
                 //版本号
-                .version("1.0。0")
+                .version("2.0.0")
                 .build();
     }
 
