@@ -1,4 +1,4 @@
-package com.yhc.example.config;
+package com.yhc.example.config.shiro;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -62,7 +62,7 @@ public class ShiroConfig {
         Map<String, String> map = new HashMap<>();
 
         //对所有用户认证
-        map.put("/**", "anon");
+        map.put("/**", "authc");
         map.put("/login", "anon");
         map.put("/data", "anon");
         map.put("/css/**", "anon");
@@ -70,6 +70,10 @@ public class ShiroConfig {
         map.put("/js/**", "anon");
         map.put("/lib/**", "anon");
         map.put("/logout", "logout");
+        map.put("/swagger-ui.html","anon");
+        map.put("/swagger-resources/**","anon");
+        map.put("/webjars/**","anon");
+        map.put("/*/api-docs","anon");
 //前后端不分离设置开始
 //        //登录
 //        shiroFilterFactoryBean.setLoginUrl("/");

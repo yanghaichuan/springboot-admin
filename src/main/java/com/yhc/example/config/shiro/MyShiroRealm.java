@@ -1,4 +1,4 @@
-package com.yhc.example.config;
+package com.yhc.example.config.shiro;
 
 import com.yhc.example.system.domain.entity.Permission;
 import com.yhc.example.system.domain.entity.Role;

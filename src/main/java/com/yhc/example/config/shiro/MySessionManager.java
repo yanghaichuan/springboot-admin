@@ -1,4 +1,4 @@
-package com.yhc.example.config;
+package com.yhc.example.config.shiro;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.web.servlet.ShiroHttpServletRequest;

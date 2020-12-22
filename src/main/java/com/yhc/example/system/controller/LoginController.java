@@ -5,13 +5,12 @@ import com.yhc.example.common.bean.CacheUser;
 import com.yhc.example.utils.MD5Utils;
 import com.yhc.example.system.domain.entity.User;
 import com.yhc.example.system.service.IUserService;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -21,7 +20,7 @@ import javax.annotation.Resource;
  * @description：登录Controller
  */
 @Slf4j
-@Controller
+@RestController
 public class LoginController {
 
     @Resource
@@ -35,8 +34,8 @@ public class LoginController {
      * @return 登录结果
      */
     @PostMapping("/login")
-    @ResponseBody
-    public AjaxResult login(User user) {
+    @ApiOperation(value = "用户登录", notes = "login")
+    public AjaxResult login(@ApiParam(required = true, name = "user", value = "用户实体user") @RequestBody User user) {
         log.warn("进入登录.....");
 
         String userName = user.getUserName();
@@ -62,10 +61,10 @@ public class LoginController {
      * description: 登出
      * create time: 2020/7/03 14:22
      */
-    @RequestMapping("/logout")
-    public String logOut() {
+    @GetMapping("/logout")
+    public AjaxResult logOut() {
         iUserService.logout();
-        return "pages/login";
+        return AjaxResult.success();
     }
 
     /**
@@ -76,8 +75,7 @@ public class LoginController {
      * create time: 2020/7/03 13:11
      * @return
      */
-    @RequestMapping("/un_auth")
-    @ResponseBody
+    @GetMapping("/un_auth")
     public AjaxResult unAuth() {
         return AjaxResult.error(HttpStatus.UNAUTHORIZED.value(), "用户未登录！");
     }
@@ -90,15 +88,13 @@ public class LoginController {
      * create time: 2020/7/03 17:11
      * @return
      */
-    @RequestMapping("/unauthorized")
-    @ResponseBody
+    @GetMapping("/unauthorized")
     public AjaxResult unauthorized() {
         return AjaxResult.error(HttpStatus.FORBIDDEN.value(), "用户无权限！");
     }
 
 
-    @RequestMapping("/heartDet")
-    @ResponseBody
+    @GetMapping("/heartDet")
     public AjaxResult heartDet() {
         return AjaxResult.success("用户已登录");
     }
